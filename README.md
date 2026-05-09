@@ -2,6 +2,10 @@
 
 Sample outputs and onboarding guide for the [Claude for Financial Services](https://github.com/anthropics/financial-services) plugin suite, tested using Claude Code.
 
+> ⚠️ **All outputs in this repo use Claude's training-data knowledge (cutoff ~early 2026), not real-time market data.**
+> Stock prices, valuations, earnings figures, and multiples are illustrative estimates — they will differ from current market values.
+> For production use, authenticate a live data connector (LSEG, S&P Global, FactSet, or Morningstar) so the plugins pull current figures automatically. See [Data note](#data-note) below.
+
 ## What's here
 
 | File | Command | Description |
@@ -66,9 +70,17 @@ Open [`00_onboarding_guide.md`](00_onboarding_guide.md) for the full command ref
 
 ## Data note
 
-All outputs in this repo were generated without a live data subscription. They use Claude's training-data knowledge (~early 2026 cutoff) and are illustrative. Structure and methodology are correct; specific numbers should be verified against current market data.
+**All outputs in this repo are based on Claude's training data, not real-time market data.**
 
-For live data, authenticate the LSEG or S&P Global MCP connectors included in the plugin suite.
+| What this means | Detail |
+|---|---|
+| **Knowledge cutoff** | ~early 2026. Prices, earnings, and guidance from after that date are not reflected. |
+| **Stock prices** | The GOOGL thesis, for example, used a ~$170 price from training data. The actual price at time of generation (May 2026) was ~$400 — a significant divergence. |
+| **Financial figures** | Revenue, EBITDA, and multiples are estimates based on publicly reported data Claude was trained on. They may be stale or approximate. |
+| **What is correct** | The analytical structure, methodology, and workflow logic are sound. The frameworks (DCF, LBO, comps, IC memo structure) reflect real institutional practice. |
+| **For production use** | Authenticate a live data connector — LSEG, S&P Global Capital IQ, FactSet, or Morningstar — so the plugins pull current figures automatically instead of relying on training data. |
+
+The data connectors ship with the plugin suite and are activated by running the authenticate command for each provider (e.g. `/lseg:macro-rates` will prompt for LSEG credentials if not yet authenticated). API pricing for these services is typically lower than full desktop licensing — contact each provider's sales team for API-tier quotes.
 
 ## This repo
 
