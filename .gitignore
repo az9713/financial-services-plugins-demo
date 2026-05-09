@@ -1,0 +1,13 @@
+# Original plugin source — not part of this demo repo
+financial-services-main/
+
+# Personal working notes
+README.txt
+cc1_fis.txt
+transcript.txt
+*.jpg
+*.png
+
+# Python cache
+__pycache__/
+*.pyc
