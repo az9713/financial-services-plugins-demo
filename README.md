@@ -1,10 +1,14 @@
 # Claude for Financial Services — Plugin Demo
 
-> **How this was created — the exact prompt used:**
+> **How this was created — the exact prompts used:**
 >
 > *"please install the financial services plugins from https://github.com/anthropics/financial-services/"*
 >
-> That single prompt, entered into [Claude Code](https://claude.ai/code), triggered the full installation of all 20 plugins in this suite. Everything in this repo — the sample outputs, onboarding guide, Excel comps file, and workflows — was produced in the same Claude Code session that followed.
+> That single prompt, entered into [Claude Code](https://claude.ai/code), triggered the full installation of all 20 plugins in this suite.
+>
+> After installation, `/reload-plugins` was run **without exiting Claude Code** — this hot-reloaded all 20 plugins (77 skills, 38 agents, 6 hooks, 15 MCP servers) into the active session instantly, making every command available without restarting.
+>
+> Everything in this repo — the sample outputs, onboarding guide, Excel comps file, and workflows — was produced in the same Claude Code session that followed.
 
 Sample outputs and onboarding guide for the [Claude for Financial Services](https://github.com/anthropics/financial-services) plugin suite, tested using Claude Code.
 
