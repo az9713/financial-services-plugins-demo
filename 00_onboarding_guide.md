@@ -1167,4 +1167,5 @@ If your firm has a FactSet, S&P Capital IQ, Bloomberg, or Morningstar subscripti
 ---
 
 *Claude for Financial Services | Anthropic | Version based on plugin release May 2026*
-*This guide covers plugins installed from: https://github.com/anthropics/financial-services*
+*This guide and sample outputs: https://github.com/az9713/financial-services-plugins-demo*
+*Plugin source: https://github.com/anthropics/financial-services*

@@ -70,6 +70,10 @@ All outputs in this repo were generated without a live data subscription. They u
 
 For live data, authenticate the LSEG or S&P Global MCP connectors included in the plugin suite.
 
+## This repo
+
+[github.com/az9713/financial-services-plugins-demo](https://github.com/az9713/financial-services-plugins-demo)
+
 ## Plugin source
 
 [github.com/anthropics/financial-services](https://github.com/anthropics/financial-services)
