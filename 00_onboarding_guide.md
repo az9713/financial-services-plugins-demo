@@ -22,6 +22,19 @@
 10. [Partner Plugins: LSEG & S&P Global](#10-partner-plugins-lseg--sp-global)
 11. [Named Agents](#11-named-agents)
 12. [Power Workflows](#12-power-workflows)
+    - Workflow 1: Full Equity Research on a New Company
+    - Workflow 2: PE Deal Evaluation — Inbound CIM to IC Vote
+    - Workflow 3: M&A Sell-Side Process
+    - Workflow 4: Wealth Management — New Client Onboarding
+    - Workflow 5: Daily Analyst Morning Routine
+    - Workflow 6: Fund Admin Month-End Close
+    - Workflow 7: KYC / New Investor Onboarding
+    - Workflow 8: PE Portfolio AI Value Creation Scan
+    - Workflow 9: Earnings Season Full Cycle *(equity-research + financial-analysis)*
+    - Workflow 10: Buy-Side M&A — Evaluating an Acquisition Target *(equity-research + financial-analysis + investment-banking)*
+    - Workflow 11: Wealth Management — Research-Backed Client Recommendations *(equity-research + financial-analysis + wealth-management)*
+    - Workflow 12: Full PE Deal Lifecycle — Sourcing to LP Reporting *(private-equity + financial-analysis + fund-admin + operations)*
+    - Workflow 13: New Investor KYC to First Quarterly Report *(operations + fund-admin + wealth-management)*
 13. [Quick-Reference Command Card](#13-quick-reference-command-card)
 
 ---
@@ -1046,6 +1059,238 @@ Step 3: /private-equity:value-creation [company]
 Step 4: /financial-analysis:comps [company]
         → Re-run comps to see if AI-comparable companies trade at a premium
         → Inform exit timing and positioning
+```
+
+---
+
+### Workflow 9: Earnings Season Full Cycle
+*Plugins: equity-research + financial-analysis | Covers pre- through post-earnings*
+
+Most valuable during earnings season — builds the preview before, processes results after, updates the model, re-benchmarks against peers, and revises the thesis in one connected chain.
+
+```
+Step 1: /equity-research:earnings-preview [ticker]
+        → Build consensus estimates, key metrics to watch, beat/miss/in-line scenarios
+        → Run this 3–5 days before the report
+
+Step 2: /equity-research:earnings [ticker] [quarter]
+        → (Post-results) Analyse actuals vs estimates; explain drivers; draft reaction note
+        → Paste the earnings release or transcript when prompted
+
+Step 3: /equity-research:model-update [ticker]
+        → Plug in actual results and new guidance into the financial model
+        → "Revenue beat by $200M, guided next quarter to $X–Y, raised full-year EPS by $0.15"
+
+Step 4: /financial-analysis:comps [ticker]
+        → Re-run comps with updated numbers — see if the beat changes relative valuation
+        → Generates updated .xlsx with revised peer multiples
+
+Step 5: /equity-research:thesis [ticker]
+        → Update the investment thesis based on earnings and revised model
+        → "Update thesis — Q2 beat, Cloud acceleration, DOJ ruling expected in 6 weeks"
+```
+
+**Example run (MSFT earnings week):**
+```
+/equity-research:earnings-preview MSFT
+/equity-research:earnings MSFT Q3 2026
+→ (paste earnings release)
+/equity-research:model-update MSFT
+→ "Azure +33% vs 31% est, FY guidance raised $1B at midpoint"
+/financial-analysis:comps MSFT
+/equity-research:thesis MSFT
+→ "Update — Cloud beat validates the AI monetisation thesis; raise PT"
+```
+
+---
+
+### Workflow 10: Buy-Side M&A — Evaluating an Acquisition Target
+*Plugins: equity-research + financial-analysis + investment-banking | Used by corp dev and strategic acquirers*
+
+When your company is considering acquiring another, you need both a view on the target's standalone value and the combined deal economics. This workflow builds both in sequence.
+
+```
+Step 1: /equity-research:sector [target's industry]
+        → Orient on the target's market before evaluating the company
+
+Step 2: /financial-analysis:competitive-analysis [target company]
+        → Map the competitive landscape — understand target's moat and positioning
+
+Step 3: /financial-analysis:comps [target company]
+        → Benchmark target's valuation vs public peers — establishes a market floor
+
+Step 4: /financial-analysis:dcf [target company]
+        → Build intrinsic value — what is the target worth on a standalone basis?
+
+Step 5: /investment-banking:merger-model [acquirer] acquiring [target]
+        → Model combined entity: EPS accretion/dilution, synergies, pro-forma credit
+        → Determines the maximum price you can pay while remaining accretive
+
+Step 6: /private-equity:returns
+        → Sensitivity analysis — what IRR does this deal generate across price scenarios?
+        → Helps set the walk-away price in negotiations
+```
+
+**Example run (tech company evaluating SaaS acquisition):**
+```
+/equity-research:sector HR technology and payroll SaaS
+/financial-analysis:competitive-analysis CloudPay Inc
+/financial-analysis:comps CloudPay Inc
+/financial-analysis:dcf CloudPay Inc
+/investment-banking:merger-model AcquirerCorp acquiring CloudPay Inc
+→ "Acquirer: $500M revenue, 25% EBITDA margin. Target: $20M ARR, asking $100M. $5M synergies Year 2."
+/private-equity:returns
+→ "Entry $100M, 5-year strategic hold, synergy case vs standalone case"
+```
+
+---
+
+### Workflow 11: Wealth Management — Research-Backed Client Recommendations
+*Plugins: equity-research + financial-analysis + wealth-management | Used by RIAs and wealth advisors*
+
+Most advisors recommend funds or ETFs, not individual securities. This workflow shows how to combine fundamental research with financial planning to make specific, well-supported stock recommendations for a client.
+
+```
+Step 1: /wealth-management:financial-plan
+        → Establish client's risk tolerance, time horizon, and asset allocation target
+        → This determines which sectors and market caps are appropriate for the client
+
+Step 2: /equity-research:sector [appropriate sector for client]
+        → Sector landscape for each allocation bucket (e.g. "defensive consumer staples")
+
+Step 3: /equity-research:screen [criteria matching client profile]
+        → Screen for names fitting the client's mandate
+        → e.g. "high FCF yield, low beta, dividend growth, large cap"
+
+Step 4: /equity-research:thesis [top candidate tickers]
+        → Build conviction on the 3–5 names you'd recommend — bull/bear/valuation
+
+Step 5: /financial-analysis:comps [top candidate]
+        → Validate valuation — confirm the names aren't overpriced relative to peers
+
+Step 6: /wealth-management:proposal [client name]
+        → Build the client proposal incorporating the researched names and rationale
+
+Step 7: /wealth-management:rebalance [client]
+        → Generate the specific trades to implement the new positions
+```
+
+**Example run (conservative 58-year-old pre-retiree):**
+```
+/wealth-management:financial-plan
+→ "58-year-old, $1.8M portfolio, retiring in 4 years, needs income, moderate-conservative"
+
+/equity-research:sector consumer staples dividend growers
+/equity-research:screen high FCF yield large cap consumer staples low beta
+/equity-research:thesis PG
+/equity-research:thesis KO
+/financial-analysis:comps PG
+/wealth-management:proposal Chen retirement portfolio
+/wealth-management:rebalance Chen account
+```
+
+---
+
+### Workflow 12: Full PE Deal Lifecycle — Sourcing to LP Reporting
+*Plugins: private-equity + financial-analysis + fund-admin + operations | Complete fund lifecycle*
+
+The longest workflow here — follows a deal from initial sourcing all the way through LP reporting after close. Spans four plugins and represents a full 6–18 month deal process.
+
+```
+Step 1: /private-equity:source [sector/criteria]
+        → Discover target companies; draft personalised founder outreach emails
+
+Step 2: /private-equity:screen-deal
+        → Quick go/no-go once a company responds — 5 minutes to initial verdict
+
+Step 3: /financial-analysis:comps [company]
+        → Benchmark before the first meeting — know the valuation range going in
+
+Step 4: /private-equity:dd-checklist [company]
+        → Generate the full DD workstream list before LOI
+
+Step 5: /private-equity:dd-prep [company] management presentation
+        → Prepare questions and red flags for each diligence meeting
+
+Step 6: /private-equity:unit-economics [company]
+        → Deep-dive unit economics — NRR, cohorts, CAC/LTV (for SaaS/subscription)
+
+Step 7: /financial-analysis:lbo [company]
+        → Build the returns model — set the maximum entry price
+
+Step 8: /private-equity:ic-memo [company]
+        → Draft the IC memo — get the investment committee vote
+
+[DEAL CLOSES]
+
+Step 9: /operations:kyc-doc-parse + /operations:kyc-rules
+        → If taking new LP co-investors for this deal: run KYC on them
+
+Step 10: /private-equity:value-creation [company]
+         → Build the 100-day plan and post-acquisition EBITDA bridge
+
+Step 11: /private-equity:portfolio [company]
+         → Quarterly KPI review vs plan throughout the hold period
+
+Step 12: /fund-admin:gl-recon + /fund-admin:nav-tieout
+         → Month-end close and LP statement tie-out for the fund
+```
+
+**Example run:**
+```
+/private-equity:source B2B SaaS $10-30M ARR healthcare vertical Southeast US
+/private-equity:screen-deal
+→ "MedBilling Pro — RCM SaaS for physician practices, $18M ARR, 28% growth, asking $90M"
+/financial-analysis:comps MedBilling Pro
+/private-equity:dd-checklist MedBilling Pro
+/private-equity:dd-prep MedBilling Pro CEO and CFO interview
+/private-equity:unit-economics MedBilling Pro
+/financial-analysis:lbo MedBilling Pro
+/private-equity:ic-memo MedBilling Pro
+/operations:kyc-doc-parse
+→ (paste LP co-investor onboarding documents)
+/operations:kyc-rules
+/private-equity:value-creation MedBilling Pro
+/private-equity:portfolio MedBilling Pro Q1 2026
+/fund-admin:gl-recon
+/fund-admin:nav-tieout
+```
+
+---
+
+### Workflow 13: New Investor KYC to First Quarterly Report
+*Plugins: operations + fund-admin + wealth-management | Back-office onboarding pipeline*
+
+When a new investor subscribes to the fund or becomes a wealth management client, there's a required sequence: compliance first, then account setup, then reporting.
+
+```
+Step 1: /operations:kyc-doc-parse
+        → Parse the investor's onboarding documents into structured fields
+
+Step 2: /operations:kyc-rules
+        → Apply rules grid — get risk rating and flag any missing documents
+
+[If wealth management client:]
+
+Step 3: /wealth-management:financial-plan
+        → Build the comprehensive financial plan for the new client
+
+Step 4: /wealth-management:proposal [client]
+        → Create the personalised investment proposal
+
+Step 5: /wealth-management:rebalance [client]
+        → Generate the initial portfolio implementation trades
+
+[If fund LP:]
+
+Step 3: /fund-admin:nav-tieout
+        → Tie the LP's initial capital account to the fund NAV pack
+
+Step 4: /fund-admin:variance-commentary
+        → Include the new subscription in period-end variance commentary
+
+Step 5: /wealth-management:client-report [client] [first period]
+        → Issue the first periodic statement
 ```
 
 ---
