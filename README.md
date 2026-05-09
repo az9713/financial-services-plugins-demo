@@ -1,5 +1,11 @@
 # Claude for Financial Services — Plugin Demo
 
+> **How this was created — the exact prompt used:**
+>
+> *"please install the financial services plugins from https://github.com/anthropics/financial-services/"*
+>
+> That single prompt, entered into [Claude Code](https://claude.ai/code), triggered the full installation of all 20 plugins in this suite. Everything in this repo — the sample outputs, onboarding guide, Excel comps file, and workflows — was produced in the same Claude Code session that followed.
+
 Sample outputs and onboarding guide for the [Claude for Financial Services](https://github.com/anthropics/financial-services) plugin suite, tested using Claude Code.
 
 > ⚠️ **All outputs in this repo use Claude's training-data knowledge (cutoff ~early 2026), not real-time market data.**
